@@ -9,6 +9,7 @@ python version : python-3.10.1
 requirements:
 
 asgiref==3.5.0
+
 Django==4.0.1
 django-cleanup==5.2.0
 django-crispy-forms==1.13.0
