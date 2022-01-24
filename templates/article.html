@@ -1,0 +1,60 @@
+{% extends 'partials/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+      <!-- blog section start --> 
+      <div class="about_section layout_padding">
+         <h1 class="text-center follow_text"><strong>MY BLOG</strong></h1>
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-8 col-sm-12 mt-5">
+                  <h2 class="most_text"> <br>{{post.title}}</h2>
+                  <p class="post_text">Post By : Andrew Darland {{post.publishing_date}}</p>
+                  <div class="about_img mt-4"><img src="{{post.image.url}}"></div>
+                  <div class="like_icon"><img src="{% static 'images/like-icon.png' %}"></div>
+                  <p class="lorem_text">{{post.content}}</p>
+                  <div class="social_icon_main">
+                     <div class="social_icon">
+                        <ul>
+                           <li><a href="{{post.facebook}}"><img src="{% static 'images/fb-icon.png' %}"></a></li>
+                           <li><a href="{{post.twiter}}"><img src="{% static 'images/twitter-icon.png' %}"></a></li>
+                           <li><a href="{{post.instagram}}"><img src="{% static 'images/instagram-icon.png' %}"></a></li>
+                        </ul>
+
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-4 col-sm-12">
+                  <div class="about_main">
+                     <h1 class="follow_text">CONNECT & FOLLOW</h1>
+                     <div class="follow_icon">
+                        <ul>
+                           <li><a href="{{post.facebook}}"><img src="{% static 'images/fb-icon-1.png' %}"></a></li>
+                           <li><a href="{{post.twitter}}"><img src="{% static 'images/twitter-icon-1.png' %}"></a></li>
+                           <li><a href="{{post.linkedin}}"><img src="{% static 'images/linkedin-icon-1.png' %}"></a></li>
+                           <li><a href="{{post.instagram}}"><img src="{% static 'images/instagram-icon-1.png' %}"></a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               {% if request.user.is_authenticated %}
+               <div class="col-lg-4 col-sm-12 offset-4">
+                     <div class="follow_icon">
+                        <form method="POST">
+                           {% csrf_token %}
+                           <ul>
+                              <li><a href="{{ post.get_update_url }}" class="btn btn-primary" role ="button">Update</a></li>
+                              <li><a href="{{ post.get_delete_url }}" class="btn btn-danger" role ="button">Delete</a></li>
+                           </ul>
+                        </form>
+                     </div>
+               </div>
+               {% endif %}
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- blog section end --> 
+   {% endblock %}

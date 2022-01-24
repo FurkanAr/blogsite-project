@@ -1,0 +1,50 @@
+{% load static %}
+
+<div class="container-fluid header_main">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+       <a class="logo" href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}"></a>
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+             <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">Home</a>
+             </li>
+             <li class="nav-item">
+                <a class="nav-link" href="{% url 'about' %}">About</a>
+             </li>
+             <li class="nav-item">
+                <a class="nav-link" href="{% url 'post_list' %}">Blog</a>
+             </li>
+             <li class="nav-item">
+                <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+             </li>
+            {% if request.user.is_authenticated %}
+             <li class="nav-item">
+               <a class="nav-link" href="{% url 'post_create' %}">Add Post</a>
+            </li>
+            {% endif %}
+            {% if not request.user.is_authenticated %}        
+               <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}">Login</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="{% url 'register' %}">Register</a>
+               </li>
+            {% else %}
+               <li class="nav-item">
+                  <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+               </li>              
+            {% endif %}
+            
+             <li class="nav-item">
+               <form class="form-inline my-2 my-lg-0" role="search" method="GET" action ="">
+                  <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search" value="{{request.GET.q}}">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>             
+            </li>
+          </ul>
+       </div>
+    </nav>
+ </div>

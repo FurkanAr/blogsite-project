@@ -1,0 +1,94 @@
+{% extends 'partials/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+      <!-- header section start -->
+      <div class="header_section">
+
+         <!-- banner section start --> 
+         <div class="container-fluid">
+            <div class="banner_section layout_padding">
+               <h1 class="banner_taital">welcome <br>our blog</h1>
+               <div id="my_slider" class="carousel slide" data-ride="carousel">
+                  <div class="carousel-inner">
+                     <div class="carousel-item active">
+                        <div class="image_main">
+                           <div class="container">
+                              <img src="{% static 'images/img-1.png' %}" class="image_1">
+                              <div class="contact_bt"><a href="{% url 'contact' %}">Contact Us</a></div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="carousel-item">
+                        <div class="image_main">
+                           <div class="container">
+                              <img src="{% static 'images/img-1.png' %}" class="image_1">
+                              <div class="contact_bt"><a href="{% url 'contact' %}">Contact Us</a></div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="carousel-item">
+                        <div class="image_main">
+                           <div class="container">
+                              <img src="{% static 'images/img-1.png' %}" class="image_1">
+                              <div class="contact_bt"><a href="{% url 'contact' %}">Contact Us</a></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+                  <i class="fa fa-angle-left"></i>
+                  </a>
+                  <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+                  <i class="fa fa-angle-right"></i>
+                  </a>
+               </div>
+            </div>
+         </div>
+         <!-- banner section end --> 
+      </div>
+      <!-- header section end --> 
+      <div class="container">
+         <div class="touch_setion">
+            <div class="box_main">
+               <div class="image_2">
+                  <h4 class="who_text active"> <a href="{% url 'about' %}">Who Am I</a></h4>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- about section start --> 
+      <div class="about_section layout_padding">
+         <div class="container">
+            <div class="row">
+               <h4 class="who_text">Recent Posts</h4>
+               <div class="col-lg-8 col-sm-12">
+               {% for post in posts %}
+                  <div class="about_img"><img src="{{post.image.url}}"></div>
+                  <div class="like_icon"><img src="{% static 'images/like-icon.png' %}"></div>
+                  <p class="post_text">Post By : {{post.publishing_date}}</p>
+                  <h2 class="most_text"><a href= "{{ post.get_absolute_url }}" title = "">{{post.title}}</a> 
+                  <p class="lorem_text">{{post.content|truncatechars:270 }}</p>
+                  <div class="social_icon_main">
+                     <div class="social_icon">
+                        <ul>
+                           <li><a href="{{post.facebook}}"><img src="{% static 'images/fb-icon.png' %}"></a></li>
+                           <li><a href="{{post.twiter}}"><img src="{% static 'images/twitter-icon.png' %}"></a></li>
+                           <li><a href="{{post.instagram}}"><img src="{% static 'images/instagram-icon.png' %}"></a></li>
+                        </ul>
+                     </div>
+                     <div class="read_bt"><a href="{{ post.get_absolute_url }}">Read More</a></div>
+                  </div>
+                  <br>
+               {% endfor %}
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- about section end --> 
+
+
+      
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'partials/base.html' %}
+
+{% load static %}
+
+{% block content %}
+      <!-- blog section start --> 
+      <div class="about_section layout_padding">
+         <h1 class="text-center follow_text"><strong>MY BLOG</strong></h1>
+         <div class="container">
+            <div class="row">
+               {% for post in posts %} 
+               <div class="col-lg-8 col-sm-12 mt-5">
+                  <div class="about_img"><img src="{{post.image.url}}"></div>
+                  <div class="like_icon"><img src="{% static 'images/like-icon.png' %}"></div>
+                  <p class="post_text">Post By : {{post.publishing_date}}</p>
+                  <h2 class="most_text"> <a href= "{{ post.get_absolute_url }}" title = "">{{post.title}}</a> 
+                  </h2>
+                  <p class="lorem_text">{{post.content|truncatechars:270 }}</p>
+                  <div class="social_icon_main">
+                     <div class="social_icon">
+                        <ul>
+                           <li><a href="{{post.facebook}}"><img src="{% static 'images/fb-icon.png' %}"></a></li>
+                           <li><a href="{{post.twiter}}"><img src="{% static 'images/twitter-icon.png' %}"></a></li>
+                           <li><a href="{{post.instagram}}"><img src="{% static 'images/instagram-icon.png' %}"></a></li>
+                        </ul>
+                     </div>
+                     <div class="read_bt"><a href="{{ post.get_absolute_url }}">Read More</a></div>
+                  </div>
+               </div>
+               <div class="col-lg-4 col-sm-12">
+                  <div class="about_main">
+                     <h1 class="follow_text">CONNECT & FOLLOW</h1>
+                     <div class="follow_icon">
+                        <ul>
+                           <li><a href="{{post.facebook}}"><img src="{% static 'images/fb-icon-1.png' %}"></a></li>
+                           <li><a href="{{post.twitter}}"><img src="{% static 'images/twitter-icon-1.png' %}"></a></li>
+                           <li><a href="{{post.linkedin}}"><img src="{% static 'images/linkedin-icon-1.png' %}"></a></li>
+                           <li><a href="{{post.instagram}}"><img src="{% static 'images/instagram-icon-1.png' %}"></a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               {% endfor %}
+            </div>
+            <div class="row">
+               <div class="col-lg-8 col-sm-12 mt-5">
+               <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center">
+                     {% if posts.has_previous %}
+                        <li class="page-item">     
+                        <a class="page-link" href="?page={{ posts.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Previous</a>
+                        </li>
+                     {% else %}
+                        <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Previous</a>
+                        </li>
+                     {% endif %}
+
+                     {% if posts.number|add:'-4' > 1 %}
+                        <li class="page-item"><a class="page-link" href="?page={{ posts.number|add:'-5' }}">&hellip;</a></li>
+                     {% endif %}
+
+                     {% for i in posts.paginator.page_range %}
+                        {% if posts.number == i %}
+                              <li class="page-item active" aria-current="page">
+                           <span class="page-link">
+                              {{ i }}
+                              <span class="sr-only">(current)</span>
+                           </span>
+                        </li>
+                        {% elif i > posts.number|add:'-5' and i < posts.number|add:'5' %}
+                           <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                     {% endfor %}
+
+                     {% if posts.paginator.num_pages > posts.number|add:'4' %}
+                        <li class="page-item"><a class="page-link" href="?page={{ movies.number|add:'5' }}">&hellip;</a></li>
+                     {% endif %}
+
+                     {% if posts.has_next %}
+                        <li class="page-item">
+                        <a class="page-link" href="?page={{ posts.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next</a>
+                        </li>
+                     {% else %}
+                        <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Next</a>
+                        </li>
+                     {% endif %}
+                </ul>
+               </nav>
+            </div>
+         </div>
+      </div>
+      <!-- blog section end --> 
+   {% endblock %}
