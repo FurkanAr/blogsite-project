@@ -1,6 +1,6 @@
 "# blogsite-project" 
 
-After you become a member of the blog page, you can add pictures and texts as you wish.
+After you become a member of the blog, you can add pictures and texts as you wish.
 
 Live version : https://blogsite-project.herokuapp.com/
 
